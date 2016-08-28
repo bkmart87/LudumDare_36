@@ -91,7 +91,8 @@ public class GvrReticle : MonoBehaviour, IGvrGazePointer {
   /// the user is looking at, and the intersectionPosition is the intersection
   /// point of the ray sent from the camera on the object.
   public void OnGazeStart(Camera camera, GameObject targetObject, Vector3 intersectionPosition,
-                          bool isInteractive) {
+                          bool isInteractive) 
+  {
     SetGazeTarget(intersectionPosition, isInteractive);
   }
 
@@ -101,8 +102,9 @@ public class GvrReticle : MonoBehaviour, IGvrGazePointer {
   /// The camera is the event camera, the target is the object the user is
   /// looking at, and the intersectionPosition is the intersection point of the
   /// ray sent from the camera on the object.
-  public void OnGazeStay(Camera camera, GameObject targetObject, Vector3 intersectionPosition,
-                         bool isInteractive) {
+  public void OnGazeStay (Camera camera, GameObject targetObject, Vector3 intersectionPosition,
+                         bool isInteractive) 
+  {
     SetGazeTarget(intersectionPosition, isInteractive);
   }
 
@@ -113,7 +115,8 @@ public class GvrReticle : MonoBehaviour, IGvrGazePointer {
   ///
   /// The camera is the event camera and the target is the object the user
   /// previously looked at.
-  public void OnGazeExit(Camera camera, GameObject targetObject) {
+  public void OnGazeExit(Camera camera, GameObject targetObject) 
+  {
     reticleDistanceInMeters = kReticleDistanceMax;
     reticleInnerAngle = kReticleMinInnerAngle;
     reticleOuterAngle = kReticleMinOuterAngle;
@@ -121,17 +124,20 @@ public class GvrReticle : MonoBehaviour, IGvrGazePointer {
 
   /// Called when a trigger event is initiated. This is practically when
   /// the user begins pressing the trigger.
-  public void OnGazeTriggerStart(Camera camera) {
+  public void OnGazeTriggerStart(Camera camera) 
+  {
     // Put your reticle trigger start logic here :)
   }
 
   /// Called when a trigger event is finished. This is practically when
   /// the user releases the trigger.
-  public void OnGazeTriggerEnd(Camera camera) {
+  public void OnGazeTriggerEnd(Camera camera) 
+  {
     // Put your reticle trigger end logic here :)
   }
 
-  public void GetPointerRadius(out float innerRadius, out float outerRadius) {
+  public void GetPointerRadius(out float innerRadius, out float outerRadius) 
+  {
     float min_inner_angle_radians = Mathf.Deg2Rad * kReticleMinInnerAngle;
     float max_inner_angle_radians = Mathf.Deg2Rad * (kReticleMinInnerAngle + kReticleGrowthAngle);
 
@@ -139,7 +145,8 @@ public class GvrReticle : MonoBehaviour, IGvrGazePointer {
     outerRadius = 2.0f * Mathf.Tan(max_inner_angle_radians);
   }
 
-  private void CreateReticleVertices() {
+  private void CreateReticleVertices() 
+	{
     Mesh mesh = new Mesh();
     gameObject.AddComponent<MeshFilter>();
     GetComponent<MeshFilter>().mesh = mesh;
@@ -191,15 +198,18 @@ public class GvrReticle : MonoBehaviour, IGvrGazePointer {
     mesh.Optimize();
   }
 
-  private void UpdateDiameters() {
+  private void UpdateDiameters() 
+	{
     reticleDistanceInMeters =
       Mathf.Clamp(reticleDistanceInMeters, kReticleDistanceMin, kReticleDistanceMax);
 
-    if (reticleInnerAngle < kReticleMinInnerAngle) {
+    if (reticleInnerAngle < kReticleMinInnerAngle) 
+	{
       reticleInnerAngle = kReticleMinInnerAngle;
     }
 
-    if (reticleOuterAngle < kReticleMinOuterAngle) {
+    if (reticleOuterAngle < kReticleMinOuterAngle) 
+	{
       reticleOuterAngle = kReticleMinOuterAngle;
     }
 
@@ -219,15 +229,19 @@ public class GvrReticle : MonoBehaviour, IGvrGazePointer {
     materialComp.SetFloat("_DistanceInMeters", reticleDistanceInMeters);
   }
 
-  private void SetGazeTarget(Vector3 target, bool interactive) {
+  private void SetGazeTarget(Vector3 target, bool interactive) 
+	{
     Vector3 targetLocalPosition = transform.InverseTransformPoint(target);
 
     reticleDistanceInMeters =
         Mathf.Clamp(targetLocalPosition.z, kReticleDistanceMin, kReticleDistanceMax);
-    if (interactive) {
+    if (interactive) 
+	{
       reticleInnerAngle = kReticleMinInnerAngle + kReticleGrowthAngle;
       reticleOuterAngle = kReticleMinOuterAngle + kReticleGrowthAngle;
-    } else {
+    } 
+	else 
+	{
       reticleInnerAngle = kReticleMinInnerAngle;
       reticleOuterAngle = kReticleMinOuterAngle;
     }

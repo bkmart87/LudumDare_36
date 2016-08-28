@@ -17,7 +17,8 @@ using System.Collections;
 
 /// This script provides an interface for gaze based responders used with
 /// the GvrGaze script.
-public interface IGvrGazeResponder {
+public interface IGvrGazeResponder 
+{
   /// Called when the user is looking on a GameObject with this script,
   /// as long as it is set to an appropriate layer (see GvrGaze).
   void OnGazeEnter();
