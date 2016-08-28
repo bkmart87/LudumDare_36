@@ -79,10 +79,9 @@ public class LookingAtStuff : MonoBehaviour, IGvrGazeResponder
 	public void DoShit(string whatToDo) 
 	{
 		//make this more like pick up or delete depending on a string
-
 		if (whatToDo == "NavMesh")
 		{
-			getTeleported = true; 
+				getTeleported = true;
 		}
 
 		if(whatToDo == "TurnOn")
@@ -102,10 +101,6 @@ public class LookingAtStuff : MonoBehaviour, IGvrGazeResponder
 	public void OnGazeEnter()
 	{
 		SetGazedAt(true);
-		if(dostuff == "NavMesh")
-		{
-			Showprints = true;
-		}
 
 	}
 
@@ -114,11 +109,6 @@ public class LookingAtStuff : MonoBehaviour, IGvrGazeResponder
 	public void OnGazeExit() 
 	{
 		SetGazedAt(false);
-		if(dostuff == "NavMesh")
-		{
-			Showprints = false;
-		}
-
 	}
 
 	/// Called when the viewer's trigger is used, between OnGazeEnter and OnGazeExit.
